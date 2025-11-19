@@ -1,9 +1,47 @@
 body {
   margin: 0;
-  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: #1a1a2e;
+  color: #fff;
+}
+
+#ui {
+  padding: 20px;
+  max-width: 800px;
+}
+
+#stats, #god-stats, #actions, #gods, #map, #log {
+  margin-bottom: 10px;
+}
+
+#god-stats span {
+  margin-right: 10px;
+}
+
+#actions button, #gods button, #map button {
+  margin-right: 10px;
+  margin-bottom: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#map button.area:disabled {
+  opacity: 0.5;
+}
+
+#log {
+  min-height: 80px;
+  border: 1px solid #444;
+  padding: 8px;
+  background: #0f0f1a;
+  overflow-y: auto;
+  max-height: 150px;
 }
 
 canvas#gameCanvas {
   display: block;
   background: #000;
+  width: 100%;
+  height: 400px;
 }
