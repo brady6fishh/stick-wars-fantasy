@@ -1,64 +1,178 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Stick Wars</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fantasy Strategy Game</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Game container and UI elements -->
-    <div id="game-container">
-        <div id="hud">
-            <div id="res-container">
-                <span id="gold">Gold: 0</span>
-                <span id="mana">Mana: 0</span>
-            </div>
-            <div id="unit-container">
-                <span id="warrior-count">0</span>
-                <span id="archer-count">0</span>
-                <span id="mage-count">0</span>
-            </div>
-            <div id="age-container">
-                <span id="age-display">Age: 1</span>
-                <button id="advance-age">Advance Age</button>
-            </div>
-        </div>
-        <canvas id="game-canvas" width="800" height="600"></canvas>
-        <div id="panel">
-            <button id="mine-gold">Mine Gold</button>
-            <button id="collect-mana">Collect Mana</button>
-            <button id="summon-warrior">Summon Warrior</button>
-            <button id="summon-archer">Summon Archer</button>
-            <button id="summon-mage">Summon Mage</button>
-        </div>
+  <!-- Top Bar UI for resources, unit buttons and controls -->
+  <div id="topBar" class="ui-bar">
+    <div id="resourceInfo" class="ui-section-group">
+      <div class="ui-section">
+        <span class="ui-label">Mana:</span>
+        <span id="manaDisplay" class="ui-value">0</span>
+      </div>
+      <div class="ui-section">
+        <span class="ui-label">Gold:</span>
+        <span id="goldDisplay" class="ui-value">0</span>
+      </div>
+      <div class="ui-section">
+        <span class="ui-label">Age:</span>
+        <span id="ageDisplay" class="ui-value">1</span>
+      </div>
     </div>
-
-    <!-- God skill tree UI (hidden by default) -->
-    <div id="god-skill-tree" class="hidden">
-        <h2>God Skill Tree</h2>
-        <div class="god" id="fire-god">
-            <h3>Fire God</h3>
-            <button class="upgrade-fire">Upgrade Fire</button>
-            <span class="fire-level">Level: 0</span>
-        </div>
-        <div class="god" id="water-god">
-            <h3>Water God</h3>
-            <button class="upgrade-water">Upgrade Water</button>
-            <span class="water-level">Level: 0</span>
-        </div>
-        <div class="god" id="earth-god">
-            <h3>Earth God</h3>
-            <button class="upgrade-earth">Upgrade Earth</button>
-            <span class="earth-level">Level: 0</span>
-        </div>
-        <div class="god" id="air-god">
-            <h3>Air God</h3>
-            <button class="upgrade-air">Upgrade Air</button>
-            <span class="air-level">Level: 0</span>
-        </div>
-        <button id="close-god-tree">Close</button>
+    <div id="unitButtons" class="ui-section-group">
+      <button id="summonWarrior" class="ui-button">Summon Warrior</button>
+      <button id="summonArcher" class="ui-button">Summon Archer</button>
+      <button id="summonMage" class="ui-button">Summon Mage</button>
     </div>
+    <div id="godMenuButton" class="ui-section-group">
+      <button id="openGodTree" class="ui-button">Open God Skill Tree</button>
+    </div>
+  </div>
 
-    <script src="main.js" defer></script>
+  <!-- Game canvas for main battle/action area -->
+  <canvas id="gameCanvas" width="800" height="450"></canvas>
+
+  <!-- Side Panel UI for base upgrades and troop selection in battle -->
+  <div id="sidePanel" class="ui-panel hidden">
+    <div id="baseUpgradePanel" class="panel-section hidden">
+      <h2>Base Upgrades</h2>
+      <div class="upgrade-option">
+        <span>Increase Base Health</span>
+        <button id="upgradeBaseHealth" class="ui-button">Upgrade (Cost: 50)</button>
+      </div>
+      <div class="upgrade-option">
+        <span>Improve Mana Regen</span>
+        <button id="upgradeManaRegen" class="ui-button">Upgrade (Cost: 30)</button>
+      </div>
+    </div>
+    <div id="troopSelectPanel" class="panel-section hidden">
+      <h2>Select Troops</h2>
+      <div class="troop-option">
+        <span>Warrior</span>
+        <input type="checkbox" id="selectWarrior" checked>
+      </div>
+      <div class="troop-option">
+        <span>Archer</span>
+        <input type="checkbox" id="selectArcher" checked>
+      </div>
+      <div class="troop-option">
+        <span>Mage</span>
+        <input type="checkbox" id="selectMage" checked>
+      </div>
+    </div>
+    <button id="closeSidePanel" class="ui-button">Close</button>
+  </div>
+
+  <!-- God Skill Tree Modal -->
+  <div id="godTreeModal" class="modal hidden">
+    <div class="modal-content">
+      <h2>God Skill Tree</h2>
+      <div id="godTree">
+        <div id="fireGod" class="god-branch">
+          <h3>Fire God</h3>
+          <button id="fireGodUpgrade" class="ui-button">Upgrade Fire (Cost: 10)</button>
+          <span id="fireGodLevel">Level: 0</span>
+        </div>
+        <div id="waterGod" class="god-branch">
+          <h3>Water God</h3>
+          <button id="waterGodUpgrade" class="ui-button">Upgrade Water (Cost: 10)</button>
+          <span id="waterGodLevel">Level: 0</span>
+        </div>
+        <div id="earthGod" class="god-branch">
+          <h3>Earth God</h3>
+          <button id="earthGodUpgrade" class="ui-button">Upgrade Earth (Cost: 10)</button>
+          <span id="earthGodLevel">Level: 0</span>
+        </div>
+        <div id="airGod" class="god-branch">
+          <h3>Air God</h3>
+          <button id="airGodUpgrade" class="ui-button">Upgrade Air (Cost: 10)</button>
+          <span id="airGodLevel">Level: 0</span>
+        </div>
+      </div>
+      <button id="closeGodTree" class="ui-button">Close</button>
+    </div>
+  </div>
+
+  <!-- Post-Battle Screen -->
+  <div id="postBattleScreen" class="modal hidden">
+    <div class="modal-content">
+      <h2>Battle Complete</h2>
+      <p id="battleResult">You won!</p>
+      <button id="continueToUpgrades" class="ui-button">Continue</button>
+    </div>
+  </div>
+
+  <!-- Upgrade Screen -->
+  <div id="upgradeScreen" class="modal hidden">
+    <div class="modal-content">
+      <h2>Upgrades</h2>
+      <p>Skill Points: <span id="skillPoints">0</span></p>
+      <div class="upgrade-option">
+        <span>Increase Gold Gain</span>
+        <button id="upgradeGoldGain" class="ui-button">Upgrade</button>
+      </div>
+      <div class="upgrade-option">
+        <span>Increase Mana Gain</span>
+        <button id="upgradeManaGain" class="ui-button">Upgrade</button>
+      </div>
+      <button id="continueToTroopSelection" class="ui-button">Select Troops</button>
+    </div>
+  </div>
+
+  <!-- Troop Selection Screen -->
+  <div id="troopSelectionScreen" class="modal hidden">
+    <div class="modal-content">
+      <h2>Select Troops</h2>
+      <p>Select up to 6 different troop types for the next battle.</p>
+      <div class="troop-list">
+        <div class="troop-item">
+          <input type="checkbox" id="troopWarrior" checked>
+          <label for="troopWarrior">Warrior</label>
+        </div>
+        <div class="troop-item">
+          <input type="checkbox" id="troopArcher" checked>
+          <label for="troopArcher">Archer</label>
+        </div>
+        <div class="troop-item">
+          <input type="checkbox" id="troopMage" checked>
+          <label for="troopMage">Mage</label>
+        </div>
+        <!-- More troop types can be added here -->
+      </div>
+      <button id="continueToGodUpgrades" class="ui-button">Continue</button>
+    </div>
+  </div>
+
+  <!-- God Upgrade Screen -->
+  <div id="godUpgradeScreen" class="modal hidden">
+    <div class="modal-content">
+      <h2>Worship Points: <span id="worshipPoints">0</span></h2>
+      <div id="godUpgradeOptions">
+        <div class="god-upgrade">
+          <span>Fire Power</span>
+          <button id="upgradeFirePower" class="ui-button">Upgrade</button>
+        </div>
+        <div class="god-upgrade">
+          <span>Water Blessing</span>
+          <button id="upgradeWaterBlessing" class="ui-button">Upgrade</button>
+        </div>
+        <div class="god-upgrade">
+          <span>Earth Shield</span>
+          <button id="upgradeEarthShield" class="ui-button">Upgrade</button>
+        </div>
+        <div class="god-upgrade">
+          <span>Air Agility</span>
+          <button id="upgradeAirAgility" class="ui-button">Upgrade</button>
+        </div>
+      </div>
+      <button id="finishUpgrades" class="ui-button">Finish</button>
+    </div>
+  </div>
+
+  <script src="main.js" defer></script>
 </body>
 </html>
