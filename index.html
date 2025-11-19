@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="ui">
+  <div id="hubScreen">
     <h1>Stick Wars Fantasy</h1>
     <div id="stats">
       <span id="age">Age 1</span> | <span id="resources">Gold: 0</span>
@@ -44,6 +44,55 @@
     </div>
     <div id="log"></div>
   </div>
+
+  <div id="battleScreen" style="display:none;">
+    <h2>Battle</h2>
+    <div id="baseStats">Your Base Health: <span id="playerBaseHealth">100</span> | Enemy Base Health: <span id="enemyBaseHealth">100</span></div>
+    <div id="battleActions">
+      <button id="summonWarriorBtn">Summon Warrior</button>
+      <button id="summonArcherBtn">Summon Archer</button>
+      <button id="summonMageBtn">Summon Mage</button>
+      <button id="upgradeBaseBtn">Upgrade Base</button>
+      <button id="finishBattleBtn">Finish Battle</button>
+    </div>
+  </div>
+
+  <div id="areaCompleteScreen" style="display:none;">
+    <h2>Area Cleared!</h2>
+    <p id="areaCompleteMessage"></p>
+    <button id="continueToUpgradesBtn">Continue</button>
+  </div>
+
+  <div id="basicUpgradeScreen" style="display:none;">
+    <h2>Upgrade Base/Units</h2>
+    <p>Skill Points: <span id="basicSkillPointsDisplay">0</span></p>
+    <button id="upgradeBaseHealthBtn">Increase Base Health</button>
+    <button id="upgradeTurretBtn">Upgrade Turret</button>
+    <button id="upgradeEconomyBtn">Increase Gold Gain</button>
+    <button id="continueToTroopSelectBtn">Next</button>
+  </div>
+
+  <div id="troopSelectScreen" style="display:none;">
+    <h2>Select Troops for Next Battle</h2>
+    <p>You may select up to 6 types.</p>
+    <div id="troopOptions">
+      <label><input type="checkbox" id="selectWarrior"> Warrior</label>
+      <label><input type="checkbox" id="selectArcher"> Archer</label>
+      <label><input type="checkbox" id="selectMage"> Mage</label>
+    </div>
+    <button id="continueToGodUpgradeBtn">Next</button>
+  </div>
+
+  <div id="godUpgradeScreen" style="display:none;">
+    <h2>Allocate Worship Points</h2>
+    <p>Worship Points: <span id="worshipPointsDisplay">0</span></p>
+    <button id="worshipFireBtn">Worship Fire</button>
+    <button id="worshipWaterBtn">Worship Water</button>
+    <button id="worshipEarthBtn">Worship Earth</button>
+    <button id="worshipAirBtn">Worship Air</button>
+    <button id="finishUpgradesBtn">Finish</button>
+  </div>
+
   <canvas id="gameCanvas"></canvas>
   <script src="script.js"></script>
 </body>
