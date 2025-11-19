@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Fantasy Stick Wars</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Stick Wars Fantasy</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <canvas id="gameCanvas"></canvas>
-  <script src="script.js"></script>
+<div id="ui">
+    <h1>Stick Wars Fantasy</h1>
+    <div id="stats">
+        <span id="age">Age 1</span> |
+        <span id="resources">Gold: 0</span>
+    </div>
+    <div id="god-stats">
+        <span id="god1">God of Fire: 0</span>
+        <span id="god2">God of Water: 0</span>
+        <span id="god3">God of Earth: 0</span>
+        <span id="god4">God of Air: 0</span>
+    </div>
+    <div id="actions">
+        <button id="mineBtn">Mine Gold</button>
+        <button id="advanceAgeBtn">Advance Age</button>
+    </div>
+    <div id="gods">
+        <button id="investFireBtn">Invest in Fire</button>
+        <button id="investWaterBtn">Invest in Water</button>
+        <button id="investEarthBtn">Invest in Earth</button>
+        <button id="investAirBtn">Invest in Air</button>
+    </div>
+    <div id="map">
+        <button class="area" id="area1">Plains</button>
+        <button class="area" id="area2" disabled>Forest</button>
+        <button class="area" id="area3" disabled>Mountains</button>
+    </div>
+    <div id="log"></div>
+</div>
+<canvas id="gameCanvas"></canvas>
+<script src="script.js"></script>
 </body>
 </html>
