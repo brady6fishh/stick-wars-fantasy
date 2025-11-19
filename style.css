@@ -10,15 +10,26 @@ body {
   max-width: 800px;
 }
 
-#stats, #god-stats, #actions, #gods, #map, #log {
+#stats,
+#god-stats,
+#unit-stats,
+#actions,
+#units,
+#gods,
+#map,
+#log {
   margin-bottom: 10px;
 }
 
-#god-stats span {
+#god-stats span,
+#unit-stats span {
   margin-right: 10px;
 }
 
-#actions button, #gods button, #map button {
+#actions button,
+#units button,
+#gods button,
+#map button {
   margin-right: 10px;
   margin-bottom: 5px;
   padding: 8px 12px;
@@ -26,7 +37,8 @@ body {
   cursor: pointer;
 }
 
-#map button.area:disabled {
+#map button:disabled,
+#units button:disabled {
   opacity: 0.5;
 }
 
