@@ -5,9 +5,15 @@ body {
   color: #fff;
 }
 
-#ui {
+#hubScreen,
+#battleScreen,
+#areaCompleteScreen,
+#basicUpgradeScreen,
+#troopSelectScreen,
+#godUpgradeScreen {
   padding: 20px;
   max-width: 800px;
+  margin: auto;
 }
 
 #stats,
@@ -17,7 +23,11 @@ body {
 #units,
 #gods,
 #map,
-#log {
+#log,
+#battleInfo,
+#basic-upgrades,
+#troop-options,
+#god-upgrades {
   margin-bottom: 10px;
 }
 
@@ -26,34 +36,45 @@ body {
   margin-right: 10px;
 }
 
-#actions button,
-#units button,
-#gods button,
-#map button {
-  margin-right: 10px;
-  margin-bottom: 5px;
+button {
   padding: 8px 12px;
-  font-size: 14px;
+  margin-right: 5px;
+  background: #2e2e4f;
+  color: #fff;
+  border: none;
   cursor: pointer;
 }
 
-#map button:disabled,
-#units button:disabled {
+button:disabled {
   opacity: 0.5;
+  cursor: default;
 }
 
 #log {
-  min-height: 80px;
   border: 1px solid #444;
-  padding: 8px;
-  background: #0f0f1a;
+  padding: 10px;
+  height: 100px;
   overflow-y: auto;
-  max-height: 150px;
+  background: #0d0d1a;
 }
 
-canvas#gameCanvas {
-  display: block;
-  background: #000;
+canvas {
   width: 100%;
   height: 400px;
+  background: #0d0d1a;
+  margin-top: 10px;
+}
+
+/* Additional sections for upgrades & troop select lists */
+#basic-upgrades ul,
+#troop-options ul,
+#god-upgrades ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#basic-upgrades li,
+#troop-options li,
+#god-upgrades li {
+  margin-bottom: 5px;
 }
