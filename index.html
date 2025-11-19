@@ -1,41 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Stick Wars Fantasy</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Stick Wars Fantasy</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="ui">
+  <div id="ui">
     <h1>Stick Wars Fantasy</h1>
     <div id="stats">
-        <span id="age">Age 1</span> |
-        <span id="resources">Gold: 0</span>
+      <span id="age">Age 1</span> | 
+      <span id="resources">Gold: 0</span>
     </div>
     <div id="god-stats">
-        <span id="god1">God of Fire: 0</span>
-        <span id="god2">God of Water: 0</span>
-        <span id="god3">God of Earth: 0</span>
-        <span id="god4">God of Air: 0</span>
+      <span id="god1">God of Fire: 0</span>
+      <span id="god2">God of Water: 0</span>
+      <span id="god3">God of Earth: 0</span>
+      <span id="god4">God of Air: 0</span>
+    </div>
+    <div id="unit-stats">
+      <span id="workerCount">Workers: 0</span>
+      <span id="warriorCount">Warriors: 0</span>
+      <span id="archerCount">Archers: 0</span>
+      <span id="mageCount">Mages: 0</span>
     </div>
     <div id="actions">
-        <button id="mineBtn">Mine Gold</button>
-        <button id="advanceAgeBtn">Advance Age</button>
+      <button id="mineBtn">Mine Gold</button>
+      <button id="advanceAgeBtn">Advance Age</button>
+    </div>
+    <div id="units">
+      <button id="buyWorkerBtn">Hire Worker (Cost: 20)</button>
+      <button id="buyWarriorBtn" disabled>Train Warrior (Cost: 50)</button>
+      <button id="buyArcherBtn" disabled>Train Archer (Cost: 100)</button>
+      <button id="buyMageBtn" disabled>Train Mage (Cost: 200)</button>
     </div>
     <div id="gods">
-        <button id="investFireBtn">Invest in Fire</button>
-        <button id="investWaterBtn">Invest in Water</button>
-        <button id="investEarthBtn">Invest in Earth</button>
-        <button id="investAirBtn">Invest in Air</button>
+      <button id="investFireBtn">Invest in Fire</button>
+      <button id="investWaterBtn">Invest in Water</button>
+      <button id="investEarthBtn">Invest in Earth</button>
+      <button id="investAirBtn">Invest in Air</button>
     </div>
     <div id="map">
-        <button class="area" id="area1">Plains</button>
-        <button class="area" id="area2" disabled>Forest</button>
-        <button class="area" id="area3" disabled>Mountains</button>
+      <button id="plainsBtn">Plains</button>
+      <button id="forestBtn" disabled>Forest</button>
+      <button id="mountainsBtn" disabled>Mountains</button>
     </div>
-    <div id="log"></div>
-</div>
-<canvas id="gameCanvas"></canvas>
-<script src="script.js"></script>
+    <div id="log" class="log"></div>
+  </div>
+  <canvas id="gameCanvas"></canvas>
+  <script src="script.js"></script>
 </body>
 </html>
