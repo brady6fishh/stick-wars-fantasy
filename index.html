@@ -1,99 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Stick Wars Fantasy</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Stick Wars</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="hubScreen">
-    <h1>Stick Wars Fantasy</h1>
-    <div id="stats">
-      <span id="age">Age 1</span> | <span id="resources">Gold: 0</span>
+    <!-- Game container and UI elements -->
+    <div id="game-container">
+        <div id="hud">
+            <div id="res-container">
+                <span id="gold">Gold: 0</span>
+                <span id="mana">Mana: 0</span>
+            </div>
+            <div id="unit-container">
+                <span id="warrior-count">0</span>
+                <span id="archer-count">0</span>
+                <span id="mage-count">0</span>
+            </div>
+            <div id="age-container">
+                <span id="age-display">Age: 1</span>
+                <button id="advance-age">Advance Age</button>
+            </div>
+        </div>
+        <canvas id="game-canvas" width="800" height="600"></canvas>
+        <div id="panel">
+            <button id="mine-gold">Mine Gold</button>
+            <button id="collect-mana">Collect Mana</button>
+            <button id="summon-warrior">Summon Warrior</button>
+            <button id="summon-archer">Summon Archer</button>
+            <button id="summon-mage">Summon Mage</button>
+        </div>
     </div>
-    <div id="god-stats">
-      <span id="god1">God of Fire: 0</span>
-      <span id="god2">God of Water: 0</span>
-      <span id="god3">God of Earth: 0</span>
-      <span id="god4">God of Air: 0</span>
-    </div>
-    <div id="unit-stats">
-      <span id="warriorCount">Warriors: 0</span>
-      <span id="archerCount">Archers: 0</span>
-      <span id="mageCount">Mages: 0</span>
-    </div>
-    <div id="actions">
-      <button id="mineBtn">Mine Gold</button>
-      <button id="advanceAgeBtn">Advance Age</button>
-    </div>
-    <div id="units">
-      <button id="buyWarriorBtn">Train Warrior (Cost: 50)</button>
-      <button id="buyArcherBtn">Train Archer (Cost: 100)</button>
-      <button id="buyMageBtn">Train Mage (Cost: 150)</button>
-    </div>
-    <div id="gods">
-      <button id="investFireBtn">Invest in Fire</button>
-      <button id="investWaterBtn">Invest in Water</button>
-      <button id="investEarthBtn">Invest in Earth</button>
-      <button id="investAirBtn">Invest in Air</button>
-    </div>
-    <div id="map">
-      <button id="area1">Plains</button>
-      <button id="area2" disabled>Forest</button>
-      <button id="area3" disabled>Mountains</button>
-    </div>
-    <div id="log"></div>
-  </div>
 
-  <div id="battleScreen" style="display:none;">
-    <h2>Battle</h2>
-    <div id="baseStats">Your Base Health: <span id="playerBaseHealth">100</span> | Enemy Base Health: <span id="enemyBaseHealth">100</span></div>
-    <div id="battleActions">
-      <button id="summonWarriorBtn">Summon Warrior</button>
-      <button id="summonArcherBtn">Summon Archer</button>
-      <button id="summonMageBtn">Summon Mage</button>
-      <button id="upgradeBaseBtn">Upgrade Base</button>
-      <button id="finishBattleBtn">Finish Battle</button>
+    <!-- God skill tree UI (hidden by default) -->
+    <div id="god-skill-tree" class="hidden">
+        <h2>God Skill Tree</h2>
+        <div class="god" id="fire-god">
+            <h3>Fire God</h3>
+            <button class="upgrade-fire">Upgrade Fire</button>
+            <span class="fire-level">Level: 0</span>
+        </div>
+        <div class="god" id="water-god">
+            <h3>Water God</h3>
+            <button class="upgrade-water">Upgrade Water</button>
+            <span class="water-level">Level: 0</span>
+        </div>
+        <div class="god" id="earth-god">
+            <h3>Earth God</h3>
+            <button class="upgrade-earth">Upgrade Earth</button>
+            <span class="earth-level">Level: 0</span>
+        </div>
+        <div class="god" id="air-god">
+            <h3>Air God</h3>
+            <button class="upgrade-air">Upgrade Air</button>
+            <span class="air-level">Level: 0</span>
+        </div>
+        <button id="close-god-tree">Close</button>
     </div>
-  </div>
 
-  <div id="areaCompleteScreen" style="display:none;">
-    <h2>Area Cleared!</h2>
-    <p id="areaCompleteMessage"></p>
-    <button id="continueToUpgradesBtn">Continue</button>
-  </div>
-
-  <div id="basicUpgradeScreen" style="display:none;">
-    <h2>Upgrade Base/Units</h2>
-    <p>Skill Points: <span id="basicSkillPointsDisplay">0</span></p>
-    <button id="upgradeBaseHealthBtn">Increase Base Health</button>
-    <button id="upgradeTurretBtn">Upgrade Turret</button>
-    <button id="upgradeEconomyBtn">Increase Gold Gain</button>
-    <button id="continueToTroopSelectBtn">Next</button>
-  </div>
-
-  <div id="troopSelectScreen" style="display:none;">
-    <h2>Select Troops for Next Battle</h2>
-    <p>You may select up to 6 types.</p>
-    <div id="troopOptions">
-      <label><input type="checkbox" id="selectWarrior"> Warrior</label>
-      <label><input type="checkbox" id="selectArcher"> Archer</label>
-      <label><input type="checkbox" id="selectMage"> Mage</label>
-    </div>
-    <button id="continueToGodUpgradeBtn">Next</button>
-  </div>
-
-  <div id="godUpgradeScreen" style="display:none;">
-    <h2>Allocate Worship Points</h2>
-    <p>Worship Points: <span id="worshipPointsDisplay">0</span></p>
-    <button id="worshipFireBtn">Worship Fire</button>
-    <button id="worshipWaterBtn">Worship Water</button>
-    <button id="worshipEarthBtn">Worship Earth</button>
-    <button id="worshipAirBtn">Worship Air</button>
-    <button id="finishUpgradesBtn">Finish</button>
-  </div>
-
-  <canvas id="gameCanvas"></canvas>
-  <script src="game.js"></script>
+    <script src="main.js" defer></script>
 </body>
 </html>
